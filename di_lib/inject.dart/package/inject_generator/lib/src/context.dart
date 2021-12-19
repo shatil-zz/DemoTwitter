@@ -86,17 +86,17 @@ class BuilderLogger {
 
   /// Logs a warning adding [element]'s source information to the message.
   void warning(Element element, String message) {
-    builderContext.rawLogger.warning(_constructMessage(element, message));
+    //builderContext.rawLogger.warning(_constructMessage(element, message));
   }
 
   /// Logs a warning adding [element]'s source information to the message.
   void info(Element element, String message) {
-    builderContext.rawLogger.info(_constructMessage(element, message));
+    //builderContext.rawLogger.info(_constructMessage(element, message));
   }
 
   /// Logs a warning adding [element]'s source information to the message.
   void severe(Element element, String message) {
-    builderContext.rawLogger.severe(_constructMessage(element, message));
+    //builderContext.rawLogger.severe(_constructMessage(element, message));
   }
 
   String _constructMessage(Element element, String message) {

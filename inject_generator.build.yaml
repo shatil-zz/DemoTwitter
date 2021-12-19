@@ -1,0 +1,24 @@
+# Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
+targets:
+  $default:
+    builders:
+      json_serializable:
+        generate_for:
+          - lib/*
+      mockito:
+        generate_for:
+          - test/*
+
+builders:
+  inject_generator:
+    target: ":inject_generator"
+    import: "package:inject_generator/inject_generator.dart"
+    builder_factories:
+      - "summarizeBuilder"
+      - "generateBuilder"
+    build_extensions:
+      ".dart":
+        - ".inject.summary"
+        - ".inject.dart"
+    build_to: source
+    auto_apply: dependents
