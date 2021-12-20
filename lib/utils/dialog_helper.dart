@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppProgressDialog extends StatelessWidget {
+  const AppProgressDialog({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -17,12 +19,16 @@ class AppProgressDialog extends StatelessWidget {
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
                 color: Colors.transparent,
-                padding: const EdgeInsets.all(AppSize.paddingNormal),
                 child: Container(
-                    padding: const EdgeInsets.all(AppSize.paddingNormal),
-                    width: MediaQuery.of(context).size.width / 3,
-                    height: MediaQuery.of(context).size.width / 3,
-                    child: Container()),
+                  padding: const EdgeInsets.all(AppSize.paddingNormal),
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                      width: AppSize.dialogSize,
+                      height: AppSize.dialogSize,
+                      child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                      )),
+                ),
               ),
             ),
           ),

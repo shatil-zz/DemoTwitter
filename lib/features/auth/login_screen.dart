@@ -24,12 +24,11 @@ class LoginPageState extends State<LoginPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<AuthBloc>(context,listen: false).loginDataStream.listen((event) {
+    Provider.of<AuthBloc>(context, listen: false)
+        .loginDataStream
+        .listen((event) {
       if (event.status == ResourceStatus.loading) {
-        showAnimatedNavigation(
-            context,
-            const CircularProgressIndicator(
-                color: Colors.white, backgroundColor: Colors.transparent));
+        showAnimatedNavigation(context, AppProgressDialog());
       } else if (event.status == ResourceStatus.success) {
         Navigator.pop(context);
       } else if (event.status == ResourceStatus.failed) {
@@ -51,6 +50,7 @@ class LoginPageState extends State<LoginPage> {
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
                 controller: emailController,
@@ -65,6 +65,8 @@ class LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(),
                 ),
               ),
+              const Padding(
+                  padding: EdgeInsets.only(bottom: AppSize.paddingNormal)),
               TextFormField(
                 controller: passwordController,
                 validator: (value) {
@@ -79,6 +81,9 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 onEditingComplete: submitLoginRequest,
               ),
+              Padding(
+                  padding: EdgeInsets.only(
+                      bottom: (MediaQuery.of(context).size.height / 6)))
             ],
           ),
         ),
@@ -88,7 +93,7 @@ class LoginPageState extends State<LoginPage> {
 
   submitLoginRequest() {
     if (_formKey.currentState?.validate() ?? false) {
-      Provider.of<AuthBloc>(context,listen: false)
+      Provider.of<AuthBloc>(context, listen: false)
           .emailLogin(emailController.text, passwordController.text);
     }
   }
