@@ -18,14 +18,14 @@ class FirebaseAuthRepository implements AuthRepository {
   FirebaseAuthRepository(this._provider);
 
   @override
-  Future<Resource> emailLogin(String email, String password) async {
+  Future<Resource<LoginResponseModel>> emailLogin(
+      String email, String password) async {
     try {
       UserCredential userCredential =
           await _provider.emailLogin(email, password);
-      return Resource(
-          data: LoginResponseModel(userCredential.user?.uid,
-                  userCredential.user?.email, userCredential.user?.refreshToken)
-              .toJson(),
+      return Resource<LoginResponseModel>(
+          model: LoginResponseModel(userCredential.user?.uid,
+              userCredential.user?.email, userCredential.user?.refreshToken),
           status: ResourceStatus.success);
     } catch (ex) {
       return Resource(message: "Login Failed", status: ResourceStatus.failed);

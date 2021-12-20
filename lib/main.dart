@@ -2,8 +2,10 @@ import 'dart:ui';
 import 'package:demo_twitter/di/bloc_injector.dart';
 import 'package:demo_twitter/features/auth/auth_bloc.dart';
 import 'package:demo_twitter/features/auth/login_screen.dart';
+import 'package:demo_twitter/features/home/home_screen.dart';
 import 'package:demo_twitter/features/launch_screen.dart';
 import 'package:demo_twitter/utils/app_routes.dart';
+import 'package:demo_twitter/utils/app_themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,14 +31,7 @@ class _MainState extends State<MainWidget> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.green,
-        splashColor: Colors.blueGrey,
-        scaffoldBackgroundColor: Colors.white,
-        backgroundColor: Colors.white,
-        dividerColor: Colors.transparent,
-        textTheme: const TextTheme(bodyText1: TextStyle(color: Colors.black54)),
-      ),
+      theme: appThemeData,
       home: Provider<AuthBloc>.value(
         value: blocInjector.authBloc,
         child: LaunchScreen(),
@@ -50,7 +45,12 @@ class _MainState extends State<MainWidget> {
     if (settings.name == AppRoutes.userLogin) {
       _widget = Provider<AuthBloc>.value(
         value: blocInjector.authBloc,
-        child: LoginPage(),
+        child: const LoginPage(),
+      );
+    } else if (settings.name == AppRoutes.home) {
+      _widget = Provider<AuthBloc>.value(
+        value: blocInjector.authBloc,
+        child: const HomeScreen(),
       );
     } else {
       _widget = LaunchScreen();
