@@ -3,6 +3,7 @@ import 'package:demo_twitter/di/bloc_injector.dart';
 import 'package:demo_twitter/features/auth/auth_bloc.dart';
 import 'package:demo_twitter/features/auth/login_screen.dart';
 import 'package:demo_twitter/features/home/home_screen.dart';
+import 'package:demo_twitter/features/home/twitter_bloc.dart';
 import 'package:demo_twitter/features/launch_screen.dart';
 import 'package:demo_twitter/utils/app_routes.dart';
 import 'package:demo_twitter/utils/app_themes.dart';
@@ -48,8 +49,8 @@ class _MainState extends State<MainWidget> {
         child: const LoginPage(),
       );
     } else if (settings.name == AppRoutes.home) {
-      _widget = Provider<AuthBloc>.value(
-        value: blocInjector.authBloc,
+      _widget = Provider<TwitterBloc>.value(
+        value: blocInjector.twitterBloc,
         child: const HomeScreen(),
       );
     } else {

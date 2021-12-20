@@ -94,11 +94,12 @@ class LoginPageState extends State<LoginPage> {
   submitLoginRequest() async {
     if (_formKey.currentState?.validate() ?? false) {
       showAnimatedNavigation(context, const AppProgressDialog());
-      Resource<LoginResponseModel> resource =
-          await Provider.of<AuthBloc>(context, listen: false)
-              .emailLogin(emailController.text, passwordController.text);
+      AuthBloc authBloc = Provider.of<AuthBloc>(context, listen: false);
+      Resource<LoginResponseModel> resource = await authBloc.emailLogin(
+          emailController.text, passwordController.text);
       Navigator.pop(context);
       if (resource.status == ResourceStatus.success) {
+        authBloc.initializeUserInfo();
         Navigator.of(context).pushReplacementNamed(AppRoutes.home);
       } else if (resource.status == ResourceStatus.failed) {
         showSnackBarMessage(context, resource.message ?? "Failed");

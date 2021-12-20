@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo_twitter/di/bloc_module.dart';
 import 'package:demo_twitter/features/auth/auth_bloc.dart';
 import 'package:demo_twitter/features/auth/auth_repository.dart';
+import 'package:demo_twitter/features/home/twitter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 
@@ -21,6 +22,9 @@ abstract class BlocInjector {
 
   @provide
   AuthBloc get authBloc;
+
+  @provide
+  TwitterBloc get twitterBloc;
 
   static Future<BlocInjector> create(
       {FirebaseFirestore? firebaseFirestore, FirebaseAuth? firebaseAuth}) {

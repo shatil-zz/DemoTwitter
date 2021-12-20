@@ -1,7 +1,11 @@
 class AppRoutes {
-  static String get rootPath => "/";
+  static String rootPath = "/";
 
-  static String get home => "/home";
+  static String home = "/home";
 
-  static String get userLogin => "/login";
+  static String userLogin = "/login";
+}
+
+class FirestorePath {
+  static String twits = "twits";
 }

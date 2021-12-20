@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:demo_twitter/features/auth/auth_bloc.dart';
+import 'package:demo_twitter/main.dart';
 import 'package:demo_twitter/utils/app_routes.dart';
+import 'package:demo_twitter/utils/user_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LaunchScreen extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -37,7 +38,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
 
   waitAndCheckLogin() async {
     await Future.delayed(const Duration(seconds: 2));
-    if (Provider.of<AuthBloc>(context,listen: false).isLoggedInUser) {
+    AuthBloc authBloc = Provider.of<AuthBloc>(context, listen: false);
+    if (authBloc.isLoggedInUser) {
+      authBloc.initializeUserInfo();
       Navigator.pushReplacementNamed(context, AppRoutes.home);
     } else {
       Navigator.pushReplacementNamed(context, AppRoutes.userLogin);

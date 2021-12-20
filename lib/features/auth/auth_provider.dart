@@ -19,4 +19,8 @@ class FirebaseAuthProvider {
   bool isLoggedInUser() {
     return _firebaseAuth.currentUser != null;
   }
+  User? getCurrentUser()
+  {
+    return _firebaseAuth.currentUser;
+  }
 }

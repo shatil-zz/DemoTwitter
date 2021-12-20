@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:demo_twitter/base/base_resource.dart';
 import 'package:demo_twitter/features/auth/auth_provider.dart';
 import 'package:demo_twitter/features/auth/login_response_model.dart';
+import 'package:demo_twitter/utils/user_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inject/inject.dart';
 
@@ -9,6 +10,8 @@ abstract class AuthRepository {
   Future<Resource> emailLogin(String email, String password);
 
   bool isLoggedInUser();
+
+  initializeUserInfo();
 }
 
 @provide
@@ -30,6 +33,15 @@ class FirebaseAuthRepository implements AuthRepository {
     } catch (ex) {
       return Resource(message: "Login Failed", status: ResourceStatus.failed);
     }
+  }
+
+  @override
+  initializeUserInfo() async {
+    // TODO: implement initializeUserInfo
+    User? user = _provider.getCurrentUser();
+    userInfo.email = user?.email;
+    userInfo.refreshToken = user?.refreshToken;
+    userInfo.userId=user?.uid;
   }
 
   @override

@@ -38,10 +38,11 @@ class AppProgressDialog extends StatelessWidget {
   }
 }
 
-showSnackBarMessage(BuildContext context, String message) {
+showSnackBarMessage(
+    BuildContext context, String message, {Color? backgroundColor=Colors.red}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      backgroundColor: Colors.red,
+      backgroundColor: backgroundColor,
       content: Text(message),
     ),
   );

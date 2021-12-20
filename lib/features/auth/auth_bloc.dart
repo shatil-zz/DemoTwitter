@@ -18,6 +18,8 @@ class AuthBloc extends Bloc {
 
   bool get isLoggedInUser => _repository.isLoggedInUser();
 
+  initializeUserInfo()=> _repository.initializeUserInfo();
+
   @override
   void dispose() {
     // TODO: implement dispose

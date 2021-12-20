@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo_twitter/base/response_parser.dart';
 
 class Resource<T> {
@@ -14,26 +15,26 @@ class Resource<T> {
       this.status = ResourceStatus.empty,
       this.code = 0});
 
-  factory Resource.fromDynamic(
+  static Resource<T> fromDynamic<T>(
       {dynamic data,
       String? message,
       ResourceStatus status = ResourceStatus.empty,
       int code = 0}) {
     if (data is Map<String, dynamic>) {
-      return Resource(
+      return Resource<T>(
           model: ResponseParser.fromJson<T>(data),
           message: message,
           status: status,
           code: code);
-    } else if (data is List) {
+    } else if (data is List<QueryDocumentSnapshot<Map<String, dynamic>>>) {
       List<T> modelList = [];
-      for (dynamic json in data) {
-        modelList.add(ResponseParser.fromJson(json));
+      for (QueryDocumentSnapshot<Map<String, dynamic>> json in data) {
+        modelList.add(ResponseParser.fromJson<T>(json.data()));
       }
-      return Resource(
+      return Resource<T>(
           modelList: modelList, message: message, status: status, code: code);
     } else {
-      return Resource(
+      return Resource<T>(
           model: data as T, message: message, status: status, code: code);
     }
   }
