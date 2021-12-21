@@ -7,7 +7,6 @@ import 'package:demo_twitter/features/home/home_screen.dart';
 import 'package:demo_twitter/features/home/twitter_bloc.dart';
 import 'package:demo_twitter/features/launch_screen.dart';
 import 'package:demo_twitter/utils/app_routes.dart';
-import 'package:demo_twitter/utils/app_themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,10 +17,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   blocInjector = await BlocInjector.create();
-  runApp(MainWidget());
+  runApp(const MainWidget());
 }
 
 class MainWidget extends StatefulWidget {
+  const MainWidget({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _MainState();
@@ -33,9 +34,24 @@ class _MainState extends State<MainWidget> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: appThemeData,
-      home: Provider<AuthBloc>.value(
-        value: blocInjector.authBloc,
+      theme: ThemeData(
+          primaryColor: Colors.green,
+          splashColor: Colors.blueGrey,
+          secondaryHeaderColor: Colors.green,
+          scaffoldBackgroundColor: Colors.white,
+          backgroundColor: Colors.white,
+          dividerColor: Colors.transparent,
+          primarySwatch: Colors.green,
+          textTheme: const TextTheme(
+            bodyText1: TextStyle(color: Colors.black87,fontSize: 16),
+            bodyText2: TextStyle(color: Colors.black54,fontSize: 14),
+            button: TextStyle(color: Colors.white),
+            headline1: TextStyle(color: Colors.white),
+            subtitle2: TextStyle(color: Colors.black45),
+          )),
+      home: Provider<AuthBloc>(
+        create: (context) => blocInjector.authBloc,
+        dispose: disposeBloc,
         child: LaunchScreen(),
       ),
       onGenerateRoute: getGenerateRoute,
