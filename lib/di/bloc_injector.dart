@@ -17,10 +17,6 @@ abstract class BlocInjector {
   FirebaseFirestore get firebaseFirestore;
 
   @provide
-  @singleton
-  FirebaseAuthRepository get authRepository;
-
-  @provide
   AuthBloc get authBloc;
 
   @provide

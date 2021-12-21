@@ -3,7 +3,6 @@ import 'package:demo_twitter/base/base_resource.dart';
 import 'package:demo_twitter/features/auth/auth_repository.dart';
 import 'package:demo_twitter/features/auth/login_response_model.dart';
 import 'package:inject/inject.dart';
-import 'package:rxdart/rxdart.dart';
 
 @provide
 class AuthBloc extends Bloc {
@@ -22,7 +21,5 @@ class AuthBloc extends Bloc {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    print("dispose");
   }
 }

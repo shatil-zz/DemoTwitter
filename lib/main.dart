@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:demo_twitter/base/base_bloc.dart';
 import 'package:demo_twitter/di/bloc_injector.dart';
 import 'package:demo_twitter/features/auth/auth_bloc.dart';
 import 'package:demo_twitter/features/auth/login_screen.dart';
@@ -44,19 +45,25 @@ class _MainState extends State<MainWidget> {
   Route getGenerateRoute(RouteSettings settings) {
     Widget _widget;
     if (settings.name == AppRoutes.userLogin) {
-      _widget = Provider<AuthBloc>.value(
-        value: blocInjector.authBloc,
+      _widget = Provider<AuthBloc>(
+        create: (context) => blocInjector.authBloc,
+        dispose: disposeBloc,
         child: const LoginPage(),
       );
     } else if (settings.name == AppRoutes.home) {
-      _widget = Provider<TwitterBloc>.value(
-        value: blocInjector.twitterBloc,
+      _widget = Provider<TwitterBloc>(
+        create: (context) => blocInjector.twitterBloc,
+        dispose: disposeBloc,
         child: const HomeScreen(),
       );
     } else {
       _widget = LaunchScreen();
     }
     return _createRoute(settings, _widget);
+  }
+
+  disposeBloc(BuildContext context, Bloc bloc) {
+    bloc.dispose();
   }
 
   Route _createRoute(final RouteSettings _settings, final _widget) {
