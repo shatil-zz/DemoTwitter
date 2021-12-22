@@ -1,6 +1,5 @@
 import 'package:demo_twitter/base/base_bloc.dart';
 import 'package:demo_twitter/di/bloc_injector.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../mock_utils/firebase_mock_utils.dart';
 

@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:demo_twitter/features/auth/auth_bloc.dart';
-import 'package:demo_twitter/main.dart';
 import 'package:demo_twitter/utils/app_routes.dart';
-import 'package:demo_twitter/utils/user_info.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
