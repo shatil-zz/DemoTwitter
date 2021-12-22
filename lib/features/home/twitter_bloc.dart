@@ -10,25 +10,18 @@ import 'package:rxdart/rxdart.dart';
 @provide
 class TwitterBloc extends Bloc {
   final FirebaseTwitterRepository _repository;
+  late final Stream<Resource<TwitModel>> twitListStream;
 
-  TwitterBloc(this._repository);
-
-  final twitListPublisher = PublishSubject<Resource<TwitModel>>();
-
-  Stream<Resource<TwitModel>> get twitListStream => twitListPublisher.stream;
+  TwitterBloc(this._repository){
+    twitListStream=_repository.getTwitList();
+  }
 
   Future<Resource<TwitModel>> postTwit(String twit) async {
     return _repository.postTwit(twit);
   }
 
-  loadTwits() {
-    twitListPublisher.sink
-        .add(Resource<TwitModel>(status: ResourceStatus.loading));
-    twitListPublisher.sink.addStream(_repository.getTwitList());
-  }
-
   @override
   void dispose() {
-    twitListPublisher.close();
+    //Dispose the items here
   }
 }

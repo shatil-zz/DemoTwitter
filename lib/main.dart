@@ -11,17 +11,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-late BlocInjector blocInjector;
-
-void main() async {
+void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  blocInjector = await BlocInjector.create();
-  runApp(const MainWidget());
+  final BlocInjector blocInjector = await BlocInjector.create();
+  runApp(MainWidget(blocInjector));
 }
 
 class MainWidget extends StatefulWidget {
-  const MainWidget({Key? key}) : super(key: key);
+  final BlocInjector blocInjector;
+
+  const MainWidget(this.blocInjector, {Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -43,14 +43,14 @@ class _MainState extends State<MainWidget> {
           dividerColor: Colors.transparent,
           primarySwatch: Colors.green,
           textTheme: const TextTheme(
-            bodyText1: TextStyle(color: Colors.black87,fontSize: 16),
-            bodyText2: TextStyle(color: Colors.black54,fontSize: 14),
+            bodyText1: TextStyle(color: Colors.black87, fontSize: 16),
+            bodyText2: TextStyle(color: Colors.black54, fontSize: 14),
             button: TextStyle(color: Colors.white),
             headline1: TextStyle(color: Colors.white),
             subtitle2: TextStyle(color: Colors.black45),
           )),
       home: Provider<AuthBloc>(
-        create: (context) => blocInjector.authBloc,
+        create: (context) => widget.blocInjector.authBloc,
         dispose: disposeBloc,
         child: LaunchScreen(),
       ),
@@ -62,15 +62,15 @@ class _MainState extends State<MainWidget> {
     Widget _widget;
     if (settings.name == AppRoutes.userLogin) {
       _widget = Provider<AuthBloc>(
-        create: (context) => blocInjector.authBloc,
+        create: (context) => widget.blocInjector.authBloc,
         dispose: disposeBloc,
         child: const LoginPage(),
       );
     } else if (settings.name == AppRoutes.home) {
       _widget = Provider<TwitterBloc>(
-        create: (context) => blocInjector.twitterBloc,
+        create: (context) => widget.blocInjector.twitterBloc,
         dispose: disposeBloc,
-        child: const HomeScreen(),
+        child: const HomePage(),
       );
     } else {
       _widget = LaunchScreen();

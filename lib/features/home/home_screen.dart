@@ -10,8 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -20,16 +20,9 @@ class HomeScreen extends StatefulWidget {
   }
 }
 
-class HomeScreenSate extends State<HomeScreen> with FieldValidators {
+class HomeScreenSate extends State<HomePage> with FieldValidators {
   final _formKey = GlobalKey<FormState>();
   final twitController = TextEditingController();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Provider.of<TwitterBloc>(context, listen: false).loadTwits();
-  }
 
   @override
   Widget build(BuildContext context) {
