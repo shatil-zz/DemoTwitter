@@ -17,8 +17,14 @@ builders:
       - "summarizeBuilder"
       - "generateBuilder"
     build_extensions:
-      "bloc*|provider*.dart":
+      ".dart":
         - ".inject.summary"
         - ".inject.dart"
     build_to: source
     auto_apply: dependents
+    defaults:
+      generate_for:
+        - lib/**/*bloc*.dart
+        - lib/**/*_repository.dart
+        - lib/**/*_provider.dart
+        - lib/di/*
