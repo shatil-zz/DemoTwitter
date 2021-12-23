@@ -22,6 +22,9 @@ class FirebaseTwitterProvider {
   }
 
   Stream<QuerySnapshot> getTwitList() {
-    return _firebaseFirestore.collection(FirestorePath.twits).snapshots();
+    return _firebaseFirestore
+        .collection(FirestorePath.twits)
+        .orderBy("createdAt", descending: true)
+        .snapshots();
   }
 }

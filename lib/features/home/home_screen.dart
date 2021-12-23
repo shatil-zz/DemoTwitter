@@ -86,7 +86,7 @@ class HomeScreenSate extends State<HomePage> with FieldValidators {
       Navigator.pop(context);
       if (resource.status == ResourceStatus.success) {
         twitController.text = "";
-        FocusScope.of(context).unfocus();
+        FocusScope.of(context).requestFocus(FocusNode());
         showSnackBarMessage(context, "Posted successfully",
             backgroundColor: Colors.green);
       } else if (resource.status == ResourceStatus.failed) {
