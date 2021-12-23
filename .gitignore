@@ -83,3 +83,4 @@ app.*.map.json
 *.g.dart
 *.inject.summary
 pubspec.lock
+coverage
