@@ -3,6 +3,7 @@ import 'package:demo_twitter/base/base_resource.dart';
 import 'package:demo_twitter/features/home/twit_model.dart';
 import 'package:demo_twitter/features/home/twitter_bloc.dart';
 import 'package:demo_twitter/utils/app_sizes.dart';
+import 'package:demo_twitter/utils/format_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,16 +49,19 @@ class TwitterListState extends State<TwitterListWidget> {
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
                             const SizedBox(
-                              height: AppSize.textPaddingSmall,
+                              height: AppSize.textPaddingMedium,
                             ),
                             if (twitModel.twitBy != null)
                               Text(
                                 "By ${twitModel.twitBy}",
                                 style: Theme.of(context).textTheme.bodyText2,
                               ),
+                            const SizedBox(
+                              height: AppSize.textPaddingSmall,
+                            ),
                             if (twitModel.createdAt != null)
                               Text(
-                                "Posted at ${(twitModel.createdAt as Timestamp).toDate().toIso8601String()}",
+                                "Posted at ${DateTimeFormatter.getDisplayDateTime(twitModel.createdAt)}",
                                 style: Theme.of(context).textTheme.bodyText2,
                               ),
                           ],

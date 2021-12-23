@@ -42,7 +42,7 @@ class _MainState extends State<MainWidget> {
           dividerColor: Colors.transparent,
           primarySwatch: Colors.green,
           textTheme: const TextTheme(
-            bodyText1: TextStyle(color: Colors.black87, fontSize: 16),
+            bodyText1: TextStyle(color: Colors.black87, fontSize: 15),
             bodyText2: TextStyle(color: Colors.black54, fontSize: 14),
             button: TextStyle(color: Colors.white),
             headline1: TextStyle(color: Colors.white),
