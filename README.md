@@ -1,16 +1,27 @@
 # demo_twitter
+- Can post twit
+- Can view all twit posted by any users
 
-A new Flutter project.
+# Architecture pattern
+Bloc and repository with rxdart and provider
 
-## Getting Started
+# Mock
+- Mockito
+- Firebase Auth and Firestore fake mock
 
-This project is a starting point for a Flutter application.
+#DI
+inject
 
-A few resources to get you started if this is your first Flutter project:
+# Test
+- Unit test
+- Widget test
+- Integration test
+run command:
+  flutter drive \
+  --driver=test_driver/integration_test.dart \
+  --target=integration_test/add_twit_test.dart
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Can login with with following credentials if used already build 
+  user1@test.com(abc123)
+  user2@test.com(abc123)
+  user3@test.com(abc123)

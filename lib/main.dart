@@ -10,17 +10,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main(List<String> args) async {
+late final BlocInjector blocInjector;
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final BlocInjector blocInjector = await BlocInjector.create();
-  runApp(MainWidget(blocInjector));
+  blocInjector = await BlocInjector.create();
+  runApp(const MainWidget());
 }
 
 class MainWidget extends StatefulWidget {
-  final BlocInjector blocInjector;
-
-  const MainWidget(this.blocInjector, {Key? key}) : super(key: key);
+  const MainWidget({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -49,7 +49,7 @@ class _MainState extends State<MainWidget> {
             subtitle2: TextStyle(color: Colors.black45),
           )),
       home: Provider<AuthBloc>(
-        create: (context) => widget.blocInjector.authBloc,
+        create: (context) => blocInjector.authBloc,
         dispose: disposeBloc,
         child: LaunchScreen(),
       ),
@@ -61,13 +61,13 @@ class _MainState extends State<MainWidget> {
     Widget _widget;
     if (settings.name == AppRoutes.userLogin) {
       _widget = Provider<AuthBloc>(
-        create: (context) => widget.blocInjector.authBloc,
+        create: (context) => blocInjector.authBloc,
         dispose: disposeBloc,
         child: const LoginPage(),
       );
     } else if (settings.name == AppRoutes.home) {
       _widget = Provider<TwitterBloc>(
-        create: (context) => widget.blocInjector.twitterBloc,
+        create: (context) => blocInjector.twitterBloc,
         dispose: disposeBloc,
         child: const HomePage(),
       );
@@ -86,7 +86,7 @@ class _MainState extends State<MainWidget> {
       settings: _settings,
       pageBuilder: (context, animation, secondaryAnimation) => _widget,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin = Offset(1.0, 0.0);
+        var begin = const Offset(1.0, 0.0);
         var end = Offset.zero;
         var curve = Curves.ease;
         var tween =

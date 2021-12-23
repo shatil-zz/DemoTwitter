@@ -17,7 +17,7 @@ builders:
       - "summarizeBuilder"
       - "generateBuilder"
     build_extensions:
-      ".dart":
+      "bloc*|provider*.dart":
         - ".inject.summary"
         - ".inject.dart"
     build_to: source
