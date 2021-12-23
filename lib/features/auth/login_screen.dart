@@ -52,7 +52,6 @@ class LoginPageState extends State<LoginPage> with FieldValidators {
               ),
               TextFormField(
                 controller: passwordController,
-                maxLength: 16,
                 validator: validatePassword,
                 obscuringCharacter: "*",
                 textInputAction: TextInputAction.done,
